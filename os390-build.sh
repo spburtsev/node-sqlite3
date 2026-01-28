@@ -8,8 +8,13 @@ rm -rf build
 rm -rf "$BINDING_DIR"
 
 # --- Run node-gyp configure and compile (link will fail, that's expected) ---
-echo "=== Running node-gyp rebuild ==="
-npx node-gyp rebuild --verbose || true
+if [ ! -d "node_modules" ]; then
+    echo "=== npm installing ==="
+    npm install --build-from-source || true
+else
+    echo "=== Running node-gyp rebuild ==="
+    npx node-gyp rebuild --verbose || true
+fi
 
 if [ ! -f "build/Release/obj.target/node_sqlite3/src/database.o" ]; then
     echo "ERROR: Compilation failed - .o files not found"
