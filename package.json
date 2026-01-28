@@ -37,6 +37,7 @@
     "deps/",
     "lib/*.js",
     "lib/*.d.ts",
+    "build/node_sqlite3.node",
     "src/"
   ],
   "repository": {
