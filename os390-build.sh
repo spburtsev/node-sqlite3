@@ -1,10 +1,7 @@
 #!/bin/bash
 
-CC=xlclang
-CXX=xlclang++
-
-LDFLAGS="-q64 -Wl,DLL"
-BINDING_DIR="build/Release"
+source ./os390-profile.sh
+BINDING_DIR="build"
 
 echo "=== Cleaning previous builds ==="
 rm -rf build
