@@ -17,6 +17,7 @@ if [ ! -f "build/Release/obj.target/node_sqlite3/src/database.o" ]; then
 fi
 
 echo "=== Compilation succeeded, manually linking ==="
+echo "=== Using NODE_LIB=$NODE_LIB ==="
 
 cd build/Release/obj.target
 
@@ -30,6 +31,11 @@ xlclang++ -q64 \
   node_modules/node-addon-api/nothing.a \
   deps/sqlite3.a \
   "$NODE_LIB"
+
+if [ $? -ne 0 ]; then
+    echo "ERROR: Linking failed"
+    exit 1
+fi
 
 mv node_sqlite3.so node_sqlite3.node
 extattr +p node_sqlite3.node
